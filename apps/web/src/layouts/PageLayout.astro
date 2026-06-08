@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro'
+import type { SEOProps } from '@/lib/seo'
+
+interface Props extends SEOProps {
+  schema?: object | object[]
+  hreflangLinks?: { lang: string; href: string }[]
+  breadcrumbs?: { label: string; href: string }[]
+  hasSidebar?: boolean
+}
+
+const { breadcrumbs, hasSidebar = false, ...rest } = Astro.props
+---
+
+<BaseLayout {...rest}>
+  <slot name="head" slot="head" />
+
+  {breadcrumbs && breadcrumbs.length > 0 && (
+    <div class="container pt-4">
+      <Breadcrumbs crumbs={breadcrumbs} />
+    </div>
+  )}
+
+  {hasSidebar ? (
+    <div class="container py-12 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
+      <div class="min-w-0">
+        <slot />
+      </div>
+      <aside>
+        <slot name="sidebar" />
+      </aside>
+    </div>
+  ) : (
+    <slot />
+  )}
+</BaseLayout>

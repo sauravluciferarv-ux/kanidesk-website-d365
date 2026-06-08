@@ -1,0 +1,20 @@
+---
+const CALENDLY_URL =
+  (import.meta.env.PUBLIC_CALENDLY_URL || 'https://calendly.com/desk365/demo') +
+  '?hide_gdpr_banner=1&background_color=ffffff&text_color=111827&primary_color=2563eb'
+---
+
+<div class="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+  <div
+    class="calendly-inline-widget"
+    data-url={CALENDLY_URL}
+    style="min-width:320px;height:700px;"
+  ></div>
+</div>
+
+<script async src="https://assets.calendly.com/assets/external/widget.js"></script>
+
+<script>
+  import { initCalendlyTracking } from '@/lib/analytics'
+  initCalendlyTracking()
+</script>

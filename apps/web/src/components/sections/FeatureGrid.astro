@@ -1,0 +1,62 @@
+---
+interface Feature {
+  title: string
+  description: string
+  icon?: string
+  href?: string
+}
+
+interface Props {
+  features: Feature[]
+  title?: string
+  subtitle?: string
+  columns?: 2 | 3 | 4
+}
+
+const { features, title, subtitle, columns = 3 } = Astro.props
+
+const colClass = {
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-2 lg:grid-cols-3',
+  4: 'sm:grid-cols-2 lg:grid-cols-4'
+}[columns]
+---
+
+<section class="section bg-white">
+  <div class="container">
+    {(title || subtitle) && (
+      <div class="text-center mb-12">
+        {title && <h2 class="section-title">{title}</h2>}
+        {subtitle && <p class="section-subtitle mx-auto text-center mt-3">{subtitle}</p>}
+      </div>
+    )}
+
+    <div class:list={['grid grid-cols-1 gap-6', colClass]}>
+      {features.map((f) => (
+        <div class:list={['card group', f.href && 'hover:shadow-md transition-shadow cursor-pointer']}>
+          {f.href ? (
+            <a href={f.href} class="block h-full">
+              {f.icon && (
+                <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center text-brand-600 mb-4 text-xl">
+                  {f.icon}
+                </div>
+              )}
+              <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">{f.title}</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">{f.description}</p>
+            </a>
+          ) : (
+            <>
+              {f.icon && (
+                <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center text-brand-600 mb-4 text-xl">
+                  {f.icon}
+                </div>
+              )}
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{f.title}</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">{f.description}</p>
+            </>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

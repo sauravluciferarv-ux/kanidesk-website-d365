@@ -1,0 +1,29 @@
+{
+  "home": {
+    "title": "Desk365 — Helpdesk-Software für wachsende Teams",
+    "description": "Desk365 ist ein leistungsstarkes Helpdesk- und Ticketsystem. Verwalten Sie E-Mails, Chats und Tickets in einem Arbeitsbereich.",
+    "headline": "Support, der persönlich wirkt und mühelos skaliert",
+    "subheadline": "Desk365 bündelt E-Mails, Chats und Tickets in einem Workspace, damit sich Ihr Team auf das Wesentliche konzentrieren kann.",
+    "cta": "Kostenlos starten",
+    "logoLabel": "Über 5.000 Unternehmen vertrauen uns"
+  },
+  "nav": {
+    "features": "Funktionen",
+    "integrations": "Integrationen",
+    "pricing": "Preise",
+    "customers": "Kunden",
+    "blog": "Blog"
+  },
+  "features": {
+    "inbox":    "Gemeinsamer Posteingang",
+    "inboxDesc":"Alle Tickets zentral verwalten.",
+    "auto":     "Automatisierung",
+    "autoDesc": "Tickets automatisch zuweisen und beantworten.",
+    "kb":       "Wissensdatenbank",
+    "kbDesc":   "Self-Service-Portal, das Tickets reduziert."
+  },
+  "cta": {
+    "title": "Starten Sie noch heute Ihre kostenlose Testversion",
+    "description": "Über 5.000 Teams nutzen Desk365 für exzellenten Support."
+  }
+}

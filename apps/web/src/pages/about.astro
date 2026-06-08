@@ -1,0 +1,85 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import ContactForm from '@/components/forms/ContactForm.astro'
+import { breadcrumbSchema, orgSchema } from '@/lib/schema'
+
+const SITE_URL = import.meta.env.SITE_URL || 'https://www.desk365.io'
+
+const schema = [
+  orgSchema(),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'About', url: `${SITE_URL}/about` }
+  ])
+]
+---
+
+<PageLayout
+  title="About Desk365 — Our Story & Mission"
+  description="Learn about Desk365, our mission to make customer support effortless, and the team building the future of helpdesk software."
+  canonical={`${SITE_URL}/about`}
+  schema={schema}
+  breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'About', href: '/about' }]}
+>
+  <!-- Hero -->
+  <section class="section bg-gradient-to-b from-brand-50 to-white">
+    <div class="container max-w-3xl text-center">
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6">
+        We're on a mission to make support effortless
+      </h1>
+      <p class="text-xl text-gray-500 leading-relaxed">
+        Desk365 was founded to give support teams a tool that actually helps them —
+        not one that creates more work. We build software that's powerful for agents
+        and invisible to customers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="section bg-white">
+    <div class="container max-w-3xl prose prose-lg">
+      <h2>Our story</h2>
+      <p>
+        Add your company origin story here. This content can be managed through Payload CMS
+        so your marketing team can update it without a developer.
+      </p>
+      <h2>Our values</h2>
+      <ul>
+        <li><strong>Customer-first</strong> — every decision starts with the customer experience.</li>
+        <li><strong>Radical transparency</strong> — we share the good and the bad openly.</li>
+        <li><strong>Bias for action</strong> — we ship, learn, and improve fast.</li>
+        <li><strong>Long-term thinking</strong> — we build for trust, not just metrics.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section bg-brand-700 text-white">
+    <div class="container">
+      <dl class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        {[
+          { value: '5,000+', label: 'Companies served' },
+          { value: '2M+',    label: 'Tickets resolved' },
+          { value: '99.9%',  label: 'Uptime SLA' },
+          { value: '4.8★',   label: 'G2 rating' }
+        ].map(({ value, label }) => (
+          <div>
+            <dd class="text-4xl font-extrabold mb-1">{value}</dd>
+            <dt class="text-brand-200 text-sm">{label}</dt>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Contact form on About page -->
+  <section class="section bg-white">
+    <div class="container max-w-xl">
+      <div class="text-center mb-10">
+        <h2 class="section-title">Get in touch</h2>
+        <p class="text-gray-500 mt-2">Have a question? We'd love to hear from you.</p>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</PageLayout>

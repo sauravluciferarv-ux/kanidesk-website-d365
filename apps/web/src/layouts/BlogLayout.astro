@@ -1,0 +1,65 @@
+---
+import PageLayout from './PageLayout.astro'
+import { articleSchema, breadcrumbSchema } from '@/lib/schema'
+import type { Post } from '@/lib/payload'
+
+interface Props {
+  post: Post
+}
+
+const { post } = Astro.props
+const SITE_URL = import.meta.env.SITE_URL || 'https://www.desk365.io'
+const postUrl = `${SITE_URL}/blog/${post.slug}`
+
+const schema = [
+  articleSchema({
+    title: post.title,
+    description: post.excerpt,
+    publishedAt: post.publishedAt,
+    authorName: post.author?.name,
+    imageUrl: post.coverImage?.url,
+    url: postUrl
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Blog', url: `${SITE_URL}/blog` },
+    { name: post.title, url: postUrl }
+  ])
+]
+---
+
+<PageLayout
+  title={post.title}
+  description={post.excerpt ?? ''}
+  canonical={postUrl}
+  ogImage={post.coverImage?.url}
+  ogType="article"
+  schema={schema}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Blog', href: '/blog' },
+    { label: post.title, href: `/blog/${post.slug}` }
+  ]}
+  hasSidebar
+>
+  <article class="prose prose-lg max-w-none">
+    {post.coverImage && (
+      <img
+        src={post.coverImage.url}
+        alt={post.coverImage.alt}
+        width={post.coverImage.width}
+        height={post.coverImage.height}
+        class="rounded-xl mb-8 w-full object-cover aspect-video"
+        loading="eager"
+        fetchpriority="high"
+      />
+    )}
+    <h1>{post.title}</h1>
+    <time datetime={post.publishedAt} class="text-sm text-gray-500">
+      {new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+    </time>
+    <slot />
+  </article>
+
+  <slot name="sidebar" slot="sidebar" />
+</PageLayout>

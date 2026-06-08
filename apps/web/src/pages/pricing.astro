@@ -1,0 +1,117 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import FAQ from '@/components/sections/FAQ.astro'
+import CTA from '@/components/sections/CTA.astro'
+import { getFAQs } from '@/lib/payload'
+import { breadcrumbSchema } from '@/lib/schema'
+
+const faqs = await getFAQs('pricing').then(r => r.docs).catch(() => [])
+
+const SITE_URL = import.meta.env.SITE_URL || 'https://www.desk365.io'
+
+const plans = [
+  {
+    name: 'Starter',
+    price: '$12',
+    period: '/agent/mo',
+    description: 'Perfect for small teams getting started with helpdesk.',
+    cta: { label: 'Start free trial', href: '/request-demo' },
+    highlighted: false,
+    features: ['5 agents', 'Email & web tickets', 'Knowledge base', 'Basic reports', '2 automation rules']
+  },
+  {
+    name: 'Professional',
+    price: '$24',
+    period: '/agent/mo',
+    description: 'Advanced features for growing support teams.',
+    cta: { label: 'Start free trial', href: '/request-demo' },
+    highlighted: true,
+    badge: 'Most popular',
+    features: ['Unlimited agents', 'All channels', 'SLA management', 'Advanced reports', 'Unlimited automations', 'Priority support', 'Microsoft Teams integration']
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    period: '',
+    description: 'Tailored for large organizations with complex requirements.',
+    cta: { label: 'Contact sales', href: '/contact' },
+    highlighted: false,
+    features: ['Everything in Pro', 'Dedicated CSM', 'Custom integrations', 'SSO / SAML', 'Audit logs', 'SLA & compliance reports', 'Custom SLAs']
+  }
+]
+
+const schema = breadcrumbSchema([
+  { name: 'Home', url: SITE_URL },
+  { name: 'Pricing', url: `${SITE_URL}/pricing` }
+])
+---
+
+<PageLayout
+  title="Pricing — Desk365"
+  description="Simple, transparent pricing for teams of every size. Start free, no credit card required."
+  canonical={`${SITE_URL}/pricing`}
+  schema={schema}
+  breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Pricing', href: '/pricing' }]}
+>
+  <!-- Header -->
+  <section class="section bg-gradient-to-b from-brand-50 to-white text-center">
+    <div class="container max-w-3xl">
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">Simple, transparent pricing</h1>
+      <p class="text-xl text-gray-500">Start free. Scale as you grow. Cancel anytime.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <section class="pb-20 bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {plans.map((plan) => (
+          <div class:list={[
+            'rounded-2xl border p-8 flex flex-col',
+            plan.highlighted
+              ? 'border-brand-500 shadow-lg shadow-brand-100 relative'
+              : 'border-gray-200'
+          ]}>
+            {plan.highlighted && plan.badge && (
+              <span class="absolute -top-3 left-1/2 -translate-x-1/2 badge bg-brand-600 text-white px-4 py-1">
+                {plan.badge}
+              </span>
+            )}
+            <div class="mb-6">
+              <h2 class="text-xl font-bold text-gray-900 mb-1">{plan.name}</h2>
+              <p class="text-gray-500 text-sm mb-4">{plan.description}</p>
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-extrabold text-gray-900">{plan.price}</span>
+                {plan.period && <span class="text-gray-400 text-sm">{plan.period}</span>}
+              </div>
+            </div>
+
+            <ul class="space-y-3 mb-8 flex-1">
+              {plan.features.map((f) => (
+                <li class="flex items-start gap-2 text-sm text-gray-600">
+                  <svg class="w-4 h-4 text-green-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={plan.cta.href}
+              class:list={[
+                'btn text-center',
+                plan.highlighted ? 'btn-primary' : 'btn-secondary'
+              ]}
+            >
+              {plan.cta.label}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {faqs.length > 0 && <FAQ faqs={faqs} title="Pricing FAQs" />}
+  <CTA />
+</PageLayout>

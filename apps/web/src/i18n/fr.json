@@ -1,0 +1,29 @@
+{
+  "home": {
+    "title": "Desk365 — Logiciel de helpdesk moderne pour les équipes en croissance",
+    "description": "Desk365 est un puissant système de helpdesk et de ticketing. Gérez les e-mails, chats et tickets dans un seul espace de travail.",
+    "headline": "Un support qui semble personnel et évolue sans effort",
+    "subheadline": "Desk365 regroupe e-mails, chats et tickets dans un seul espace de travail pour que votre équipe se concentre sur vos clients.",
+    "cta": "Commencer gratuitement",
+    "logoLabel": "Plus de 5 000 entreprises nous font confiance"
+  },
+  "nav": {
+    "features": "Fonctionnalités",
+    "integrations": "Intégrations",
+    "pricing": "Tarifs",
+    "customers": "Clients",
+    "blog": "Blog"
+  },
+  "features": {
+    "inbox":    "Boîte de réception partagée",
+    "inboxDesc":"Gérez tous les tickets dans un seul espace.",
+    "auto":     "Automatisation",
+    "autoDesc": "Assignez et répondez automatiquement.",
+    "kb":       "Base de connaissances",
+    "kbDesc":   "Portail en libre-service qui réduit les tickets."
+  },
+  "cta": {
+    "title": "Commencez votre essai gratuit aujourd'hui",
+    "description": "Plus de 5 000 équipes utilisent Desk365 pour un support exceptionnel."
+  }
+}

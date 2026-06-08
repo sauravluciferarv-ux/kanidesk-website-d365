@@ -1,0 +1,62 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import DemoForm from '@/components/forms/DemoForm.astro'
+import { breadcrumbSchema } from '@/lib/schema'
+
+const SITE_URL = import.meta.env.SITE_URL || 'https://www.desk365.io'
+
+const schema = breadcrumbSchema([
+  { name: 'Home', url: SITE_URL },
+  { name: 'Request Demo', url: `${SITE_URL}/request-demo` }
+])
+---
+
+<PageLayout
+  title="Request a Demo — See Desk365 in Action"
+  description="Book a personalized 30-minute demo with our team. See how Desk365 can transform your customer support operations."
+  canonical={`${SITE_URL}/request-demo`}
+  schema={schema}
+  breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Request Demo', href: '/request-demo' }]}
+>
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        <!-- Left -->
+        <div>
+          <h1 class="text-4xl font-extrabold text-gray-900 mb-4">See Desk365 in action</h1>
+          <p class="text-lg text-gray-500 mb-8">
+            Schedule a free 30-minute demo with one of our product experts. We'll show you exactly
+            how Desk365 can be tailored to your team's workflow.
+          </p>
+
+          <ul class="space-y-4">
+            {[
+              'Live walkthrough of the platform',
+              'Answers to your specific questions',
+              'Custom pricing for your team size',
+              'Migration help from your current tool'
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-gray-700">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-10 p-5 bg-brand-50 rounded-xl">
+            <p class="text-sm font-semibold text-brand-800 mb-1">Prefer to start immediately?</p>
+            <p class="text-sm text-brand-700">
+              <a href="https://app.desk365.io/signup" class="font-medium underline">Create a free account</a> — no credit card, no setup time.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Calendly -->
+        <DemoForm />
+      </div>
+    </div>
+  </section>
+</PageLayout>

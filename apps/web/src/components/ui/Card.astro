@@ -1,0 +1,19 @@
+---
+interface Props {
+  href?: string
+  class?: string
+  hover?: boolean
+}
+
+const { href, class: className = '', hover = !!href } = Astro.props
+---
+
+{href ? (
+  <a href={href} class:list={['card block group', hover && 'hover:shadow-md hover:border-brand-200 transition-all', className]}>
+    <slot />
+  </a>
+) : (
+  <div class:list={['card', hover && 'hover:shadow-md transition-shadow', className]}>
+    <slot />
+  </div>
+)}

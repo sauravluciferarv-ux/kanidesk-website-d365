@@ -1,0 +1,50 @@
+---
+import type { FAQ } from '@/lib/payload'
+
+interface Props {
+  faqs: FAQ[]
+  title?: string
+}
+
+const { faqs, title = 'Frequently asked questions' } = Astro.props
+---
+
+<section class="section bg-gray-50">
+  <div class="container max-w-3xl">
+    <div class="text-center mb-12">
+      <h2 class="section-title">{title}</h2>
+    </div>
+
+    <div class="space-y-3" itemscope itemtype="https://schema.org/FAQPage">
+      {faqs.map((faq) => (
+        <details
+          class="group bg-white rounded-xl border border-gray-200 overflow-hidden"
+          itemscope
+          itemprop="mainEntity"
+          itemtype="https://schema.org/Question"
+        >
+          <summary
+            class="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer text-gray-900 font-medium select-none list-none hover:bg-gray-50"
+            itemprop="name"
+          >
+            {faq.question}
+            <svg
+              class="w-5 h-5 text-gray-400 shrink-0 transition-transform group-open:rotate-180"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <div
+            class="px-6 pb-4 text-gray-600 leading-relaxed"
+            itemscope
+            itemprop="acceptedAnswer"
+            itemtype="https://schema.org/Answer"
+          >
+            <p itemprop="text">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

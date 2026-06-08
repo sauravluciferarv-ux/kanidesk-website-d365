@@ -1,0 +1,8 @@
+[
+  { "from": "/home",             "to": "/",               "status": 301 },
+  { "from": "/demo",             "to": "/request-demo",   "status": 301 },
+  { "from": "/free-trial",       "to": "/request-demo",   "status": 301 },
+  { "from": "/support",          "to": "/contact",        "status": 301 },
+  { "from": "/help",             "to": "https://support.desk365.io", "status": 301 },
+  { "from": "/blog/page/1",      "to": "/blog",           "status": 301 }
+]

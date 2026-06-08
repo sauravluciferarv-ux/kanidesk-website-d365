@@ -1,0 +1,23 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Page Not Found — Desk365"
+  description="The page you're looking for doesn't exist."
+  noindex={true}
+>
+  <section class="section min-h-[60vh] flex items-center">
+    <div class="container text-center">
+      <p class="text-8xl font-extrabold text-brand-100 mb-4" aria-hidden="true">404</p>
+      <h1 class="text-3xl font-bold text-gray-900 mb-4">Page not found</h1>
+      <p class="text-gray-500 mb-8 max-w-md mx-auto">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/" class="btn-primary">Go home</a>
+        <a href="/contact" class="btn-secondary">Contact support</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

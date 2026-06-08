@@ -1,0 +1,33 @@
+---
+interface Props {
+  title?: string
+  description?: string
+  primaryCTA?: { label: string; href: string }
+  secondaryCTA?: { label: string; href: string }
+}
+
+const {
+  title = 'Start your free trial today',
+  description = 'Join 5,000+ teams using Desk365 to deliver exceptional support.',
+  primaryCTA = { label: 'Start free trial', href: '/request-demo' },
+  secondaryCTA = { label: 'See pricing', href: '/pricing' }
+} = Astro.props
+---
+
+<section class="section bg-brand-700">
+  <div class="container text-center">
+    <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">{title}</h2>
+    <p class="text-brand-200 text-lg mb-8 max-w-xl mx-auto">{description}</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href={primaryCTA.href} class="btn bg-white text-brand-700 hover:bg-brand-50 text-base px-6 py-3">
+        {primaryCTA.label}
+      </a>
+      {secondaryCTA && (
+        <a href={secondaryCTA.href} class="btn border border-brand-500 text-white hover:bg-brand-600 text-base px-6 py-3">
+          {secondaryCTA.label}
+        </a>
+      )}
+    </div>
+    <p class="mt-4 text-sm text-brand-300">No credit card required · Cancel anytime</p>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+---
+import BlogLayout from '@/layouts/BlogLayout.astro'
+import { getPosts, getPostBySlug } from '@/lib/payload'
+
+export const getStaticPaths = async () => {
+  const { docs } = await getPosts(1, 200).catch(() => ({ docs: [] }))
+  return docs.map((post) => ({ params: { slug: post.slug }, props: { post } }))
+}
+
+const { post } = Astro.props
+if (!post) return Astro.redirect('/blog')
+---
+
+<BlogLayout post={post}>
+  <!-- Rich text rendered by Payload's lexical / slate serializer -->
+  <!-- Replace with your content renderer component -->
+  <div class="prose prose-lg max-w-none mt-6" set:html={post.content as string} />
+
+  <div slot="sidebar" class="space-y-6">
+    <div class="card">
+      <h3 class="font-semibold text-gray-900 mb-3">Try Desk365 free</h3>
+      <p class="text-sm text-gray-500 mb-4">Join 5,000+ teams delivering better support.</p>
+      <a href="/request-demo" class="btn-primary w-full text-center text-sm">Request demo</a>
+    </div>
+  </div>
+</BlogLayout>

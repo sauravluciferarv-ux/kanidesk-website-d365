@@ -1,0 +1,59 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import ContactForm from '@/components/forms/ContactForm.astro'
+import { breadcrumbSchema } from '@/lib/schema'
+
+const SITE_URL = import.meta.env.SITE_URL || 'https://www.desk365.io'
+
+const schema = breadcrumbSchema([
+  { name: 'Home', url: SITE_URL },
+  { name: 'Contact', url: `${SITE_URL}/contact` }
+])
+---
+
+<PageLayout
+  title="Contact Desk365 — Sales, Support & Partnerships"
+  description="Reach out to our sales or support team. We're happy to answer your questions about Desk365."
+  canonical={`${SITE_URL}/contact`}
+  schema={schema}
+  breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Contact', href: '/contact' }]}
+>
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        <!-- Left: info -->
+        <div>
+          <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Contact us</h1>
+          <p class="text-lg text-gray-500 mb-8">
+            Our team is ready to help. Fill in the form and we'll get back to you within one business day.
+          </p>
+
+          <div class="space-y-6">
+            {[
+              { icon: '📧', label: 'Email', value: 'support@desk365.io', href: 'mailto:support@desk365.io' },
+              { icon: '💬', label: 'Live chat', value: 'Available Mon–Fri 9am–6pm IST' },
+              { icon: '📍', label: 'Office', value: 'Chennai, India' }
+            ].map(({ icon, label, value, href }) => (
+              <div class="flex items-start gap-4">
+                <span class="text-2xl">{icon}</span>
+                <div>
+                  <p class="font-semibold text-gray-900">{label}</p>
+                  {href
+                    ? <a href={href} class="text-brand-600 hover:underline">{value}</a>
+                    : <p class="text-gray-500">{value}</p>
+                  }
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="card">
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
