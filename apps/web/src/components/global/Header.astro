@@ -1,5 +1,5 @@
 ---
-// Header.astro - Restored from existing header.html
+import LanguageSwitcher from '@/components/global/LanguageSwitcher.astro'
 ---
 
 <header class="site-header" id="siteHeader">
@@ -23,6 +23,7 @@
       </div>
     </nav>
     <div class="header-cta">
+      <LanguageSwitcher />
       <a href="https://apps.desk365.io/app/app-login" class="btn-signin" title="Sign In">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="27" viewBox="0 0 24 30" fill="none"><path d="M0 29.7763C0 23.5115 5.21584 18.4329 11.6499 18.4329C18.084 18.4329 23.2998 23.5115 23.2998 29.7763H20.3874C20.3874 25.0777 16.4755 21.2688 11.6499 21.2688C6.82436 21.2688 2.91248 25.0777 2.91248 29.7763H0ZM11.6499 17.015C6.82248 17.015 2.91248 13.2079 2.91248 8.5075C2.91248 3.80711 6.82248 0 11.6499 0C16.4773 0 20.3874 3.80711 20.3874 8.5075C20.3874 13.2079 16.4773 17.015 11.6499 17.015ZM11.6499 14.1792C14.8682 14.1792 17.4749 11.6411 17.4749 8.5075C17.4749 5.37391 14.8682 2.83583 11.6499 2.83583C8.43163 2.83583 5.82496 5.37391 5.82496 8.5075C5.82496 11.6411 8.43163 14.1792 11.6499 14.1792Z" fill="#282C81"/></svg>
       </a>

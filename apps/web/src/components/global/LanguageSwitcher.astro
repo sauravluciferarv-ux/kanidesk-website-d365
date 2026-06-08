@@ -1,35 +1,36 @@
 ---
-const current = Astro.url.pathname
+const pathname = Astro.url.pathname
+
 const locales = [
   { code: 'en', label: 'English', flag: '🇺🇸' },
   { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
   { code: 'fr', label: 'Français', flag: '🇫🇷' },
-  { code: 'es', label: 'Español', flag: '🇪🇸' }
+  { code: 'es', label: 'Español', flag: '🇪🇸' },
 ]
 
 function getLocaleHref(code: string) {
-  if (code === 'en') return '/'
-  return `/${code}/`
+  return code === 'en' ? '/' : `/${code}/`
 }
+
+// Detect active locale from pathname
+const activeCode = locales.find(l => l.code !== 'en' && pathname.startsWith(`/${l.code}`))?.code ?? 'en'
+const active = locales.find(l => l.code === activeCode)!
 ---
 
-<div class="relative group">
-  <button class="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
-    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-        d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
-    </svg>
-    Language
-    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
+<div class="lang-switcher" id="langSwitcher">
+  <button class="lang-switcher-btn" id="langSwitcherBtn" aria-haspopup="listbox" aria-expanded="false">
+    <span aria-hidden="true">{active.flag}</span>
+    {active.label}
+    <i class="fas fa-angle-down chevron"></i>
   </button>
 
-  <div class="absolute bottom-full left-0 mb-2 w-40 bg-gray-800 rounded-lg border border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-1">
+  <div class="lang-switcher-dropdown" id="langSwitcherDropdown" role="listbox">
     {locales.map(({ code, label, flag }) => (
       <a
         href={getLocaleHref(code)}
-        class="flex items-center gap-2 px-3 py-2 text-sm text-gray-300 rounded hover:bg-gray-700 hover:text-white"
+        class={code === activeCode ? 'active' : ''}
+        role="option"
+        aria-selected={code === activeCode}
       >
         <span aria-hidden="true">{flag}</span>
         {label}
@@ -37,3 +38,24 @@ function getLocaleHref(code: string) {
     ))}
   </div>
 </div>
+
+<script>
+  const btn = document.getElementById('langSwitcherBtn')
+  const dropdown = document.getElementById('langSwitcherDropdown')
+
+  if (btn && dropdown) {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation()
+      const isOpen = dropdown.classList.contains('open')
+      dropdown.classList.toggle('open', !isOpen)
+      btn.classList.toggle('open', !isOpen)
+      btn.setAttribute('aria-expanded', String(!isOpen))
+    })
+
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('open')
+      btn.classList.remove('open')
+      btn.setAttribute('aria-expanded', 'false')
+    })
+  }
+</script>
