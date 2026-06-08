@@ -8,7 +8,7 @@ const SITE_URL = process.env.SITE_URL || 'https://www.desk365.io'
 export default defineConfig({
   site: SITE_URL,
   output: 'static',
-  adapter: vercel(),
+  adapter: vercel({ imageService: true }),
   trailingSlash: 'never',
   compressHTML: true,
 

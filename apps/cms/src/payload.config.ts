@@ -35,9 +35,7 @@ export default buildConfig({
   admin: {
     user: 'users',
     meta: {
-      titleSuffix: '— Desk365 CMS',
-      favicon: '/favicon.svg',
-      ogImage: '/og-admin.png'
+      titleSuffix: '— Desk365 CMS'
     }
   },
 
@@ -89,17 +87,6 @@ export default buildConfig({
       })
     ] : [])
   ],
-
-  hooks: {
-    afterOperation: [
-      async ({ operation, collection }) => {
-        const publishTriggers = ['update', 'create', 'delete']
-        if (publishTriggers.includes(operation)) {
-          await triggerVercelDeploy()
-        }
-      }
-    ]
-  },
 
   typescript: {
     outputFile: '../web/src/payload-types.ts'

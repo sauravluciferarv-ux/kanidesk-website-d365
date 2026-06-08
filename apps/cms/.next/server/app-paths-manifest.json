@@ -1,4 +1,0 @@
-{
-  "/(payload)/admin/[[...segments]]/page": "app/(payload)/admin/[[...segments]]/page.js",
-  "/page": "app/page.js"
-}

@@ -5,4 +5,5 @@ dist
 .astro
 .turbo
 .vercel
+.next
 *.tsbuildinfo
